@@ -64,6 +64,12 @@ import {
   Menu2a,
   Menu3a,
   Menu4a,
+  Menu2b,
+  Menu2c,
+  Menu2d,
+  Menu2e,
+  Menu2f,
+  Menu3b,
 
 
 } from '../pages';
@@ -184,6 +190,42 @@ export default function Router() {
         }}
       />
       <Stack.Screen
+        name="Menu2b"
+        component={Menu2b}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Menu2c"
+        component={Menu2c}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Menu2d"
+        component={Menu2d}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Menu2e"
+        component={Menu2e}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Menu2f"
+        component={Menu2f}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="Menu3"
         component={Menu3}
         options={{
@@ -193,6 +235,13 @@ export default function Router() {
       <Stack.Screen
         name="Menu3a"
         component={Menu3a}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Menu3b"
+        component={Menu3b}
         options={{
           headerShown: false,
         }}

@@ -81,9 +81,9 @@ export default function Menu3({ navigation, route }) {
             }}>
 
 
-                <MyMenu target='Menu5a' label="Ekosistem" />
-                <MyMenu target='Menu5a' label="Rantai Makanan" />
-                <MyMenu target='Menu5a' label="Interaksi dengan Organisme Lain" />
+                <MyMenu target='Menu3a' label="Ekosistem" />
+                <MyMenu target='Menu3b' label="Rantai Makanan" />
+                <MyMenu target='Menu3c' label="Interaksi dengan Organisme Lain" />
             </View>
 
         </SafeAreaView>

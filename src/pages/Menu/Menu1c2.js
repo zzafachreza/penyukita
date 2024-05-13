@@ -112,7 +112,7 @@ export default function Menu1c2({ navigation, route }) {
                 <Text style={{
                     fontFamily: fonts.sugar[600],
                     fontSize: 18,
-                    color: colors.black,
+                    color: colors.warning,
                     textAlign: 'justify'
                 }}>Ayo Lengkapilah nama-nama penyu yang masih kosong!</Text>
                 <FlatList data={DATA} renderItem={({ item, index }) => {
@@ -170,7 +170,23 @@ export default function Menu1c2({ navigation, route }) {
                         </View>
                     )
                 }} numColumns={2} />
+
+
+
             </View>
+            <Text style={{
+                fontFamily: fonts.sugar[400],
+                fontSize: 11,
+                textAlign: 'center',
+                padding: 5,
+                marginVertical: 10,
+                marginHorizontal: 20,
+                backgroundColor: colors.secondary,
+                borderRadius: 10,
+                color: colors.white
+            }}>
+                Agar kamu dapat semakin paham materi tentang penyu, mari buka menu “Tentang penyu”!
+            </Text>
             <TouchableWithoutFeedback onPress={() => navigation.replace('Home')}>
                 <View style={{
                     alignSelf: 'flex-end',

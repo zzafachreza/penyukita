@@ -11,9 +11,11 @@ import SoundPlayer from 'react-native-sound-player'
 export default function Menu1c({ navigation, route }) {
     const item = route.params;
     const [open, setOpen] = useState(false);
+    const [jawaban, setJawaban] = useState('');
 
     const cek = (x) => {
-        setOpen(true)
+        setOpen(true);
+        setJawaban(x)
         if (x == 'Sama') {
             SweetAlert.showAlertWithOptions({
                 title: 'Oops...',
@@ -25,7 +27,7 @@ export default function Menu1c({ navigation, route }) {
 
         } else {
             SweetAlert.showAlertWithOptions({
-                title: 'Kamu Hebat !',
+                title: 'Anda Hebat !',
                 subTitle: 'Jawaban benar',
                 style: 'success',
                 cancellable: true
@@ -74,7 +76,7 @@ export default function Menu1c({ navigation, route }) {
                 <Text style={{
                     fontFamily: fonts.sugar[600],
                     fontSize: 18,
-                    color: colors.black,
+                    color: colors.warning,
                     textAlign: 'justify'
                 }}>Berikut adalah gambar seluruh jenis penyu di dunia. Jika kamu amati penyu ini tampak sama atau berbeda ?</Text>
                 <View style={{
@@ -88,7 +90,7 @@ export default function Menu1c({ navigation, route }) {
                             flex: 1,
                             justifyContent: 'center',
                             alignItems: 'center',
-                            backgroundColor: colors.secondary,
+                            backgroundColor: jawaban == 'Sama' ? colors.danger : colors.secondary,
                             padding: 10,
                             borderRadius: 10,
                         }}>
@@ -104,7 +106,7 @@ export default function Menu1c({ navigation, route }) {
                         <View style={{
                             marginLeft: 20,
                             flex: 1,
-                            backgroundColor: colors.secondary,
+                            backgroundColor: jawaban == 'Berbeda' ? colors.success : colors.secondary,
                             padding: 10,
                             justifyContent: 'center',
                             alignItems: 'center',
@@ -124,6 +126,22 @@ export default function Menu1c({ navigation, route }) {
                     height: windowHeight - 350,
                     resizeMode: 'contain'
                 }} />
+
+                {jawaban !== '' &&
+
+                    <Text style={{
+                        fontFamily: fonts.sugar[400],
+                        fontSize: 11,
+                        textAlign: 'center',
+                        marginTop: 5,
+                        padding: 5,
+                        backgroundColor: colors.secondary,
+                        borderRadius: 10,
+                        color: colors.white
+                    }}>
+                        Jika gambar penyu-penyu di atas kamu amati dengan cermat, maka kamu akan mengetahui bahwa mereka tampak berbeda satu sama lain. Ada ciri-ciri tertentu yang membedakan mereka. Oleh karena itu, penyu-penyu tersebut dibedakan menjadi beberapa jenis.
+                    </Text>
+                }
             </View>
             {open && <TouchableWithoutFeedback onPress={() => navigation.navigate('Menu1c1', item)}>
                 <View style={{

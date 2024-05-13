@@ -8,12 +8,14 @@ export default function MyPicker({
   label,
   iconname,
   onValueChange,
+  backgroundColor = colors.white,
   onChangeText,
   value,
   keyboardType,
   secureTextEntry,
   styleInput,
   placeholder,
+  textColor = colors.white,
   label2,
   styleLabel,
   colorIcon = colors.primary,
@@ -31,7 +33,7 @@ export default function MyPicker({
         <Text
           style={{
             fontFamily: fonts.primary[400],
-            color: colors.white,
+            color: textColor,
             left: 10,
             fontSize: MyDimensi / 4,
             ...styleLabel,
@@ -43,7 +45,7 @@ export default function MyPicker({
       <View style={{
         borderWidth: 1,
         borderColor: colors.black,
-        backgroundColor: colors.white,
+        backgroundColor: backgroundColor,
         borderRadius: 10,
         marginTop: 5,
         fontFamily: fonts.secondary[400],
