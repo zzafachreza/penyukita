@@ -81,9 +81,9 @@ export default function Menu3({ navigation, route }) {
             }}>
 
 
-                <MyMenu target='Menu5a' label="Faktor Alam" />
-                <MyMenu target='Menu5a' label="Faktor Predasi" />
-                <MyMenu target='Menu5a' label="Faktor Antropogenik" />
+                <MyMenu target='Menu4a' label="Faktor Alam" />
+                <MyMenu target='Menu4b' label="Faktor Predasi" />
+                <MyMenu target='Menu4c' label="Faktor Antropogenik" />
             </View>
 
         </SafeAreaView>

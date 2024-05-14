@@ -87,6 +87,7 @@ export default function Menu5({ navigation, route }) {
                 <MyMenu target='Menu5a' label="Upaya Sebagai Warga" />
                 <MyMenu target='Menu5a' label="Upaya Pemerintah" />
                 <MyMenu target='Menu5a' label="Upaya Sebagai Pelajar/Mahasiswa" />
+                <MyMenu target='Menu5b' label="Kuis Sikap Peduli Penyu" />
             </View>
 
         </SafeAreaView>

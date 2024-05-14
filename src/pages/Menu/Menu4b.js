@@ -7,11 +7,11 @@ import RenderHtml from 'react-native-render-html';
 import SoundPlayer from 'react-native-sound-player'
 import { Icon } from 'react-native-elements';
 import { showMessage } from 'react-native-flash-message';
-export default function Menu4a({ navigation, route }) {
+export default function Menu4b({ navigation, route }) {
     const item = route.params;
 
     const [done, setDone] = useState(false)
-    const [nomor, setNomor] = useState(0);
+    const [nomor, setNomor] = useState(2);
     const [data, setData] = useState([
         {
             judul: 'a.	Perubahan suhu',
@@ -196,157 +196,116 @@ export default function Menu4a({ navigation, route }) {
                 }}>
 
                     <Text style={{
-                        fontFamily: fonts.sugar[600],
-                        fontSize: 20,
-                    }}>{data[nomor].judul}</Text>
-
-
-
-
-
-                    {data[nomor].info.length > 0 && <Text style={{
                         fontFamily: fonts.sugar[400],
                         fontSize: 14,
-                    }}>{data[nomor].info}</Text>}
+                    }}>Faktor predasi adalah ancaman yang timbul dari makhluk hidup yang merupakan pemangsa penyu. Berikut adalah contoh predasi yang terjadi pada telur, tukik, dan penyu dewasa.</Text>
 
-                    {data[nomor].img !== null && <Image source={data[nomor].img} style={{
-                        width: 200,
-                        height: 200,
-                        resizeMode: 'contain',
-                        alignSelf: 'center'
-                    }} />}
-                    {data[nomor].link.length > 0 && <TouchableOpacity onPress={() => Linking.openURL(data[nomor].link)}>
+
+                    <View style={{
+                        marginTop: 10,
+                        flexDirection: 'row'
+                    }}>
                         <Text style={{
                             fontFamily: fonts.sugar[400],
                             fontSize: 14,
-                            textAlign: 'center',
-                            marginBottom: 10,
-                        }}>{data[nomor].link}</Text></TouchableOpacity>}
-
-
-                    <FlatList data={data[nomor].soal} renderItem={({ item, index }) => {
-                        return (
-                            <View style={{
-                                padding: 10,
-
-                            }}>
+                        }}>a. </Text>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>Serangga seperti semut yang mengerumuni telur penyu menyebabkan cangkang telur rusak sehingga mengganggu proses penetasan penyu, mengundang bakteri dan jamur, dan bahkan mengkakibatkan embrio mati. </Text>
+                    </View>
+                    <View style={{
+                        marginTop: 10,
+                        flexDirection: 'row'
+                    }}>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>b. </Text>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>Rakun, kepiting, dan semut yang menyerang telur dan tukik (anakan penyu) yang masih berada di dalam sarang menyebabkan menurunnya populasi penyu. </Text>
+                    </View>
+                    <View style={{
+                        marginTop: 10,
+                        flexDirection: 'row'
+                    }}>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>c. </Text>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>Kepiting, babi liar, biawak, tikus, burung elang, dan anjing yang memangsa tukik saat tukik menuju perairan.
+                            {'\n'}Berikut ini video predasi kepiting terhadap tukik.{'\n\n'}
+                            <TouchableOpacity onPress={() => Linking.openURL('https://youtube.com/shorts/VFFXUTm0D-k?si=Uip0OLqlmCytIi2s')}>
                                 <Text style={{
+
                                     fontFamily: fonts.sugar[400],
-                                    fontSize: 16,
-                                }}>{item.tanya}</Text>
+                                    fontSize: 12,
+                                    color: colors.secondary,
+                                }}>https://youtube.com/shorts/VFFXUTm0D-k?si=Uip0OLqlmCytIi2s </Text>
+                            </TouchableOpacity>
+                        </Text>
+                    </View>
+                    <View style={{
+                        marginTop: 10,
+                        flexDirection: 'row'
+                    }}>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>d. </Text>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>Ikan cucut memangsa tukik di laut.</Text>
+                    </View>
+                    <View style={{
+                        marginTop: 10,
+                        flexDirection: 'row'
+                    }}>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>e. </Text>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>Jaguar memangsa penyu betina saat penyu betina berada di pantai untuk bertelur. </Text>
+                    </View>
+                    <View style={{
+                        marginTop: 10,
+                        flexDirection: 'row'
+                    }}>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>f. </Text>
+                        <Text style={{
+                            fontFamily: fonts.sugar[400],
+                            fontSize: 14,
+                        }}>Hiu dan paus memangsa penyu saat berada di dalam perairan.{'\n'}Berikut ini video predasi hiu terhadap penyu.
+                            {'\n'}
+                            {'\n'}
+                            <TouchableOpacity onPress={() => Linking.openURL('https://youtube.com/shorts/g6WeTGGrot4?si=ZC0M_PchkKXEpRYn ')}>
+                                <Text style={{
 
-                                {item.img !== null && <Image source={item.img} style={{
-                                    width: 200,
-                                    height: 120,
-                                    alignSelf: 'center',
-                                    resizeMode: 'contain'
-                                }} />}
-
-                                {item.yt.length > 0 && <TouchableOpacity onPress={() => Linking.openURL(item.yt)}>
-                                    <Text style={{
-                                        fontFamily: fonts.sugar[400],
-                                        fontSize: 14,
-                                        textAlign: 'center',
-                                    }}>{item.yt}</Text></TouchableOpacity>}
-
-
-
-                                <TouchableOpacity onPress={() => IsiData('a', index)} style={{
-                                    backgroundColor: item.jawaban == item.isi && item.isi == 'a' && item.isi !== '' ? colors.success : item.jawaban !== item.isi && item.isi == 'a' && item.isi !== '' ? colors.danger : colors.primary,
-                                    marginVertical: 5,
-                                    borderWidth: 1,
-                                    borderRadius: 10,
-                                    padding: 5,
-                                }}>
-                                    <Text style={{
-                                        fontFamily: fonts.sugar[400],
-                                        fontSize: 14,
-                                    }}>{item.a}</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => IsiData('b', index)} style={{
-                                    marginVertical: 5,
-                                    borderWidth: 1,
-                                    borderRadius: 10,
-                                    backgroundColor: item.jawaban == item.isi && item.isi == 'b' && item.isi !== '' ? colors.success : item.jawaban !== item.isi && item.isi == 'b' && item.isi !== '' ? colors.danger : colors.primary,
-                                    padding: 5,
-                                }}>
-                                    <Text style={{
-                                        fontFamily: fonts.sugar[400],
-                                        fontSize: 14,
-                                    }}>{item.b}</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => IsiData('c', index)} style={{
-                                    backgroundColor: item.jawaban == item.isi && item.isi == 'c' && item.isi !== '' ? colors.success : item.jawaban !== item.isi && item.isi == 'c' && item.isi !== '' ? colors.danger : colors.primary,
-                                    marginVertical: 5,
-                                    borderWidth: 1,
-                                    borderRadius: 10,
-                                    padding: 5,
-                                }}>
-                                    <Text style={{
-                                        fontFamily: fonts.sugar[400],
-                                        fontSize: 14,
-                                    }}>{item.c}</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => IsiData('d', index)} style={{
-                                    marginVertical: 5,
-                                    borderWidth: 1,
-                                    backgroundColor: item.jawaban == item.isi && item.isi == 'd' && item.isi !== '' ? colors.success : item.jawaban !== item.isi && item.isi == 'd' && item.isi !== '' ? colors.danger : colors.primary,
-                                    borderRadius: 10,
-                                    padding: 5,
-                                }}>
-                                    <Text style={{
-                                        fontFamily: fonts.sugar[400],
-                                        fontSize: 14,
-                                    }}>{item.d}</Text>
-                                </TouchableOpacity>
-
-                                {item.isi !== '' && <Text style={{
                                     fontFamily: fonts.sugar[400],
-                                    color: colors.white,
-                                    backgroundColor: colors.secondary,
-                                    padding: 10,
-                                    borderRadius: 5,
-                                    marginTop: 5,
-                                }}>{item.respon}</Text>}
+                                    fontSize: 12,
+                                    color: colors.secondary,
+                                }}>https://youtube.com/shorts/g6WeTGGrot4?si=ZC0M_PchkKXEpRYn </Text>
+                            </TouchableOpacity>
+                        </Text>
+                    </View>
 
-                            </View>
-                        )
-                    }} />
+
 
                 </ScrollView>
-                <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between'
-                }}>
-                    <TouchableWithoutFeedback onPress={() => {
-                        if (nomor == 0) {
-                            showMessage({
-                                message: 'Tidak bisa kembali ini adalah soal pertama'
-                            })
-                        } else {
-                            setNomor(nomor - 1)
-                        }
-                    }}>
-                        <View style={styles.btn}>
-                            <Icon type='ionicon' name='arrow-back' size={30} color={colors.white} />
-                        </View>
-                    </TouchableWithoutFeedback>
-                    <TouchableWithoutFeedback onPress={() => {
-                        if (nomor == data.length - 1) {
-                            showMessage({
-                                message: 'Tidak bisa lanjut ini adalah soal terakhir'
-                            })
-                            setDone(true)
-                        } else {
-                            setNomor(nomor + 1)
-                        }
-                    }}>
-                        <View style={styles.btn}>
-                            <Icon type='ionicon' name='arrow-forward' size={30} color={colors.white} />
-                        </View>
-                    </TouchableWithoutFeedback>
-                </View>
-            </View>}
+
+            </View >}
 
 
             {

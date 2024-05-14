@@ -70,6 +70,10 @@ import {
   Menu2e,
   Menu2f,
   Menu3b,
+  Menu3c,
+  Menu4b,
+  Menu4c,
+  Menu5b,
 
 
 } from '../pages';
@@ -247,6 +251,13 @@ export default function Router() {
         }}
       />
       <Stack.Screen
+        name="Menu3c"
+        component={Menu3c}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="Menu4"
         component={Menu4}
         options={{
@@ -256,6 +267,20 @@ export default function Router() {
       <Stack.Screen
         name="Menu4a"
         component={Menu4a}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Menu4b"
+        component={Menu4b}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Menu4c"
+        component={Menu4c}
         options={{
           headerShown: false,
         }}
@@ -271,6 +296,13 @@ export default function Router() {
       <Stack.Screen
         name="Menu5a"
         component={Menu5a}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Menu5b"
+        component={Menu5b}
         options={{
           headerShown: false,
         }}

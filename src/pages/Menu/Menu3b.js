@@ -5,9 +5,12 @@ import { apiURL, api_token, MYAPP, storeData } from '../../utils/localStorage';
 import axios from 'axios';
 import RenderHtml from 'react-native-render-html';
 import SoundPlayer from 'react-native-sound-player'
+import { Icon } from 'react-native-elements';
+import { showMessage } from 'react-native-flash-message';
 export default function Menu3b({ navigation, route }) {
     const item = route.params;
-    const alpa = ['a', 'b', 'c', 'd', 'e', 'f']
+    const alpa = ['a', 'b', 'c', 'd', 'e', 'f'];
+    const [done, setDone] = useState(false)
 
     const [data, setData] = useState([
         {
@@ -257,6 +260,38 @@ export default function Menu3b({ navigation, route }) {
                     }} />
 
                 </ScrollView>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between'
+                }}>
+                    <TouchableWithoutFeedback onPress={() => {
+                        if (nomor == 0) {
+                            showMessage({
+                                message: 'Tidak bisa kembali ini adalah soal pertama'
+                            })
+                        } else {
+                            setNomor(nomor - 1)
+                        }
+                    }}>
+                        <View style={styles.btn}>
+                            <Icon type='ionicon' name='arrow-back' size={30} color={colors.white} />
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => {
+                        if (nomor == data.length - 1) {
+                            showMessage({
+                                message: 'Tidak bisa lanjut ini adalah soal terakhir'
+                            })
+                            setDone(true)
+                        } else {
+                            setNomor(nomor + 1)
+                        }
+                    }}>
+                        <View style={styles.btn}>
+                            <Icon type='ionicon' name='arrow-forward' size={30} color={colors.white} />
+                        </View>
+                    </TouchableWithoutFeedback>
+                </View>
             </View>}
 
 
@@ -275,4 +310,15 @@ export default function Menu3b({ navigation, route }) {
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    btn: {
+        marginBottom: 10,
+        padding: 10,
+        width: 60,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 30,
+        backgroundColor: colors.warning
+    },
+})

@@ -66,6 +66,10 @@ import Menu2d from './Menu/Menu2d';
 import Menu2e from './Menu/Menu2e';
 import Menu2f from './Menu/Menu2f';
 import Menu3b from './Menu/Menu3b';
+import Menu3c from './Menu/Menu3c';
+import Menu4b from './Menu/Menu4b';
+import Menu4c from './Menu/Menu4c';
+import Menu5b from './Menu/Menu5b';
 
 //menu baru
 
@@ -93,11 +97,15 @@ export {
   Menu2f,
   Menu3a,
   Menu3b,
+  Menu3c,
   Menu4a,
+  Menu4b,
+  Menu4c,
   Menu3,
   Menu4,
   Menu5,
   Menu5a,
+  Menu5b,
   Menu6,
   Menu7,
   Menu8,

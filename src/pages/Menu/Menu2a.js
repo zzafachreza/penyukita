@@ -260,7 +260,6 @@ export default function Menu2a({ navigation, route }) {
 const styles = StyleSheet.create({
     btn: {
         marginBottom: 10,
-        marginRight: 10,
         padding: 10,
         width: 60,
         height: 60,
