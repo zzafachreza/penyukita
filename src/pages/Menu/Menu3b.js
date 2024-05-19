@@ -7,9 +7,16 @@ import RenderHtml from 'react-native-render-html';
 import SoundPlayer from 'react-native-sound-player'
 import { Icon } from 'react-native-elements';
 import { showMessage } from 'react-native-flash-message';
+import ImageView from "react-native-image-viewing";
 export default function Menu3b({ navigation, route }) {
     const item = route.params;
     const alpa = ['a', 'b', 'c', 'd', 'e', 'f'];
+
+    const [gambarPilih, setGambarPilih] = useState([
+        require('../../assets/logo.png')
+    ])
+    const [visible, setIsVisible] = useState(false);
+
     const [done, setDone] = useState(false)
 
     const [data, setData] = useState([
@@ -175,25 +182,26 @@ export default function Menu3b({ navigation, route }) {
                         fontSize: 16
                     }}>Rantai makanan adalah proses perpindahan energi dari satu organisme ke organisme lainnya melalui peristiwa makan dan dimakan. Berikut adalah contoh rantai makanan pada beberapa ekosistem.</Text>
 
-                    <Text style={{
-                        marginVertical: 10,
-                        fontFamily: fonts.sugar[400],
-                        fontSize: 16,
-                        color: colors.warning
-                    }}>Komponen biotik merupakan komponen…sedangkan komponen abiotik merupakan komponen... </Text>
 
                     <Text style={{
                         fontFamily: fonts.sugar[600],
                         fontSize: 20,
                     }}>{data[nomor].judul}</Text>
-                    <Image source={data[nomor].img} style={{
-                        width: windowWidth,
-                        marginTop: 10,
-                        borderRadius: 5,
-                        alignSelf: 'center',
-                        height: windowWidth / 1.5,
-                        resizeMode: 'contain'
-                    }} />
+
+                    <TouchableWithoutFeedback onPress={() => {
+                        setGambarPilih([data[nomor].img]);
+                        setIsVisible(true)
+                    }}>
+
+                        <Image source={data[nomor].img} style={{
+                            width: windowWidth,
+                            marginTop: 10,
+                            borderRadius: 5,
+                            alignSelf: 'center',
+                            height: windowWidth / 1.5,
+                            resizeMode: 'contain'
+                        }} />
+                    </TouchableWithoutFeedback>
 
                     <FlatList data={data[nomor].soal} renderItem={({ item, index }) => {
                         return (
@@ -306,6 +314,12 @@ export default function Menu3b({ navigation, route }) {
                 </View>
             }
 
+            <ImageView
+                images={gambarPilih}
+                imageIndex={0}
+                visible={visible}
+                onRequestClose={() => setIsVisible(false)}
+            />
         </SafeAreaView >
     )
 }

@@ -8,9 +8,14 @@ import { Icon } from 'react-native-elements';
 import SweetAlert from 'react-native-sweet-alert';
 import SoundPlayer from 'react-native-sound-player'
 import { MyPicker } from '../../components';
-
+import { Linking } from 'react-native';
+import ImageView from "react-native-image-viewing"
 export default function Menu1c2({ navigation, route }) {
     const item = route.params;
+    const [gambarPilih, setGambarPilih] = useState([
+        require('../../assets/logo.png')
+    ])
+    const [visible, setIsVisible] = useState(false);
     const [open, setOpen] = useState(false);
     const [DATA, setDATA] = useState([
         {
@@ -90,6 +95,20 @@ export default function Menu1c2({ navigation, route }) {
                     fontSize: 18,
                     fontFamily: fonts.sugar[600]
                 }}>{item.label}</Text>
+                <TouchableWithoutFeedback onPress={() => Linking.openURL('https://chat.whatsapp.com/LMynyArSQtM1aQwZ8lBUOw')}>
+                    <View style={{
+
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <Image source={require('../../assets/diskusi.png')} style={{
+                            width: 50,
+                            height: 50,
+                            resizeMode: 'contain'
+                        }} />
+
+                    </View>
+                </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
                     <View style={{
 
@@ -123,10 +142,16 @@ export default function Menu1c2({ navigation, route }) {
                             justifyContent: 'center',
                             alignItems: 'center'
                         }}>
-                            <Image source={item.img} style={{
-                                width: 80,
-                                height: 80,
-                            }} />
+                            <TouchableWithoutFeedback onPress={() => {
+                                setGambarPilih([item.img]);
+                                setIsVisible(true)
+                            }}>
+                                <Image source={item.img} style={{
+                                    width: 80,
+                                    height: 80,
+                                }} />
+                            </TouchableWithoutFeedback>
+
                             {(index == 0 || index == 3 || index == 4 || index == 6) && <>
                                 <Text style={{
                                     fontFamily: fonts.sugar[600],
@@ -203,6 +228,12 @@ export default function Menu1c2({ navigation, route }) {
                     <Icon type='ionicon' name='home' size={30} color={colors.white} />
                 </View>
             </TouchableWithoutFeedback>
+            <ImageView
+                images={gambarPilih}
+                imageIndex={0}
+                visible={visible}
+                onRequestClose={() => setIsVisible(false)}
+            />
         </SafeAreaView>
     )
 }

@@ -7,9 +7,15 @@ import RenderHtml from 'react-native-render-html';
 import SoundPlayer from 'react-native-sound-player'
 import { Icon } from 'react-native-elements';
 import { showMessage } from 'react-native-flash-message';
+import ImageView from "react-native-image-viewing";
+
 export default function Menu4c({ navigation, route }) {
     const item = route.params;
 
+    const [gambarPilih, setGambarPilih] = useState([
+        require('../../assets/logo.png')
+    ])
+    const [visible, setIsVisible] = useState(false);
     const [done, setDone] = useState(false)
     const [nomor, setNomor] = useState(0);
     const [data, setData] = useState([
@@ -299,12 +305,17 @@ export default function Menu4c({ navigation, route }) {
 
                     {data[nomor].img !== null && <View>
 
-                        <Image source={data[nomor].img} style={{
-                            width: 200,
-                            height: 200,
-                            resizeMode: 'contain',
-                            alignSelf: 'center'
-                        }} />
+                        <TouchableWithoutFeedback onPress={() => {
+                            setGambarPilih([data[nomor].img]);
+                            setIsVisible(true)
+                        }}>
+                            <Image source={data[nomor].img} style={{
+                                width: 200,
+                                height: 200,
+                                resizeMode: 'contain',
+                                alignSelf: 'center'
+                            }} />
+                        </TouchableWithoutFeedback>
                     </View>}
                     {data[nomor].link.length > 0 && <TouchableOpacity onPress={() => Linking.openURL(data[nomor].link)}>
                         <Text style={{
@@ -330,12 +341,18 @@ export default function Menu4c({ navigation, route }) {
                                             marginBottom: 10,
                                             fontSize: 12,
                                         }}>Perhatikan gambar berikut ini</Text>
-                                        <Image source={item.img} style={{
-                                            width: 200,
-                                            height: 120,
-                                            alignSelf: 'center',
-                                            resizeMode: 'contain'
-                                        }} />
+
+                                        <TouchableWithoutFeedback onPress={() => {
+                                            setGambarPilih([item.img]);
+                                            setIsVisible(true)
+                                        }}>
+                                            <Image source={item.img} style={{
+                                                width: 200,
+                                                height: 120,
+                                                alignSelf: 'center',
+                                                resizeMode: 'contain'
+                                            }} />
+                                        </TouchableWithoutFeedback>
                                     </View>
                                 }
                                 <Text style={{
@@ -463,6 +480,12 @@ export default function Menu4c({ navigation, route }) {
                 </View>
             }
 
+            <ImageView
+                images={gambarPilih}
+                imageIndex={0}
+                visible={visible}
+                onRequestClose={() => setIsVisible(false)}
+            />
         </SafeAreaView >
     )
 }

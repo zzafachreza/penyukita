@@ -30,7 +30,7 @@ export default function Menu2({ navigation, route }) {
                         flex: 1,
                         fontFamily: fonts.sugar[600],
                         color: colors.white,
-                        fontSize: 18,
+                        fontSize: 14,
                     }}>{label}</Text>
                     <Icon type='ionicon' name='chevron-forward-circle' color={colors.white} />
                 </View>
@@ -82,10 +82,10 @@ export default function Menu2({ navigation, route }) {
 
 
                 <MyMenu target='Menu2a' label="Bagian-Bagian Tubuh" />
-                <MyMenu target='Menu2b' label="Jenis-Jenis Penyu di Indonesia" />
+                <MyMenu target='Menu5a' label="Jenis-Jenis Penyu di Indonesia" />
                 <MyMenu target='Menu2c' label="Persebaran" />
                 <MyMenu target='Menu2d' label="Makanan" />
-                <MyMenu target='Menu2e' label="Habitat" />
+                <MyMenu target='Menu5a' label="Habitat" />
                 <MyMenu target='Menu2f' label="Status Konservasi" />
             </View>
 

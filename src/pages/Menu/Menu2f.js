@@ -189,8 +189,8 @@ export default function Menu2f({ navigation, route }) {
                                                 value: 'Data Deficient (Informasi Kurang)'
                                             },
                                             {
-                                                label: 'Critically Endangered (Kritis)',
-                                                value: 'Critically Endangered (Kritis)'
+                                                label: 'Critically Endangered (Sangat Terancam)',
+                                                value: 'Critically Endangered (Sangat Terancam)'
                                             },
 
                                         ]} />

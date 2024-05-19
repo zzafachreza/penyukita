@@ -7,8 +7,17 @@ import RenderHtml from 'react-native-render-html';
 import SoundPlayer from 'react-native-sound-player'
 import { Icon } from 'react-native-elements';
 import { showMessage } from 'react-native-flash-message';
+import ImageView from "react-native-image-viewing";
+
 export default function Menu4a({ navigation, route }) {
     const item = route.params;
+
+    const [gambarPilih, setGambarPilih] = useState([
+        require('../../assets/logo.png')
+    ])
+    const [visible, setIsVisible] = useState(false);
+
+
 
     const [done, setDone] = useState(false)
     const [nomor, setNomor] = useState(0);
@@ -209,12 +218,20 @@ export default function Menu4a({ navigation, route }) {
                         fontSize: 14,
                     }}>{data[nomor].info}</Text>}
 
-                    {data[nomor].img !== null && <Image source={data[nomor].img} style={{
-                        width: 200,
-                        height: 200,
-                        resizeMode: 'contain',
-                        alignSelf: 'center'
-                    }} />}
+                    {data[nomor].img !== null &&
+
+                        <TouchableWithoutFeedback onPress={() => {
+                            setGambarPilih([data[nomor].img]);
+                            setIsVisible(true)
+                        }}>
+                            <Image source={data[nomor].img} style={{
+                                width: 200,
+                                height: 200,
+                                resizeMode: 'contain',
+                                alignSelf: 'center'
+                            }} />
+                        </TouchableWithoutFeedback>
+                    }
                     {data[nomor].link.length > 0 && <TouchableOpacity onPress={() => Linking.openURL(data[nomor].link)}>
                         <Text style={{
                             fontFamily: fonts.sugar[400],
@@ -235,12 +252,17 @@ export default function Menu4a({ navigation, route }) {
                                     fontSize: 16,
                                 }}>{item.tanya}</Text>
 
-                                {item.img !== null && <Image source={item.img} style={{
-                                    width: 200,
-                                    height: 120,
-                                    alignSelf: 'center',
-                                    resizeMode: 'contain'
-                                }} />}
+                                {item.img !== null && <TouchableWithoutFeedback onPress={() => {
+                                    setGambarPilih([item.img]);
+                                    setIsVisible(true)
+                                }}>
+                                    <Image source={item.img} style={{
+                                        width: 200,
+                                        height: 120,
+                                        alignSelf: 'center',
+                                        resizeMode: 'contain'
+                                    }} />
+                                </TouchableWithoutFeedback>}
 
                                 {item.yt.length > 0 && <TouchableOpacity onPress={() => Linking.openURL(item.yt)}>
                                     <Text style={{
@@ -360,6 +382,12 @@ export default function Menu4a({ navigation, route }) {
                 </View>
             }
 
+            <ImageView
+                images={gambarPilih}
+                imageIndex={0}
+                visible={visible}
+                onRequestClose={() => setIsVisible(false)}
+            />
         </SafeAreaView >
     )
 }

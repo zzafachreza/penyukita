@@ -1,4 +1,4 @@
-import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { ActivityIndicator, Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { colors, fonts, windowHeight, windowWidth } from '../../utils';
 import { apiURL, api_token, MYAPP, storeData } from '../../utils/localStorage';
@@ -28,6 +28,20 @@ export default function Menu1b({ navigation, route }) {
                     fontSize: 18,
                     fontFamily: fonts.sugar[600]
                 }}>{item.label}</Text>
+                <TouchableWithoutFeedback onPress={() => Linking.openURL('https://chat.whatsapp.com/LMynyArSQtM1aQwZ8lBUOw')}>
+                    <View style={{
+
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <Image source={require('../../assets/diskusi.png')} style={{
+                            width: 50,
+                            height: 50,
+                            resizeMode: 'contain'
+                        }} />
+
+                    </View>
+                </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
                     <View style={{
 

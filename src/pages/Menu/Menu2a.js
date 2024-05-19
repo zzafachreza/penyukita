@@ -8,9 +8,15 @@ import { Icon } from 'react-native-elements';
 import { showMessage } from 'react-native-flash-message';
 import SweetAlert from 'react-native-sweet-alert';
 import SoundPlayer from 'react-native-sound-player'
+import ImageView from "react-native-image-viewing";
 
 export default function Menu2a({ navigation, route }) {
     const item = route.params;
+    const [gambarPilih, setGambarPilih] = useState([
+        require('../../assets/logo.png')
+    ])
+    const [visible, setIsVisible] = useState(false);
+
 
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
@@ -136,12 +142,17 @@ export default function Menu2a({ navigation, route }) {
                         marginTop: 5,
                         marginBottom: 10,
                     }}>{soal[nomor].info}</Text>
-                    <Image source={require('../../assets/tubuh.png')} style={{
-                        width: windowWidth - 100,
-                        // height: 200,
-                        resizeMode: 'contain',
-                        alignSelf: 'center'
-                    }} />
+                    <TouchableWithoutFeedback onPress={() => {
+                        setGambarPilih([require('../../assets/tubuh.png')]);
+                        setIsVisible(true);
+                    }}>
+                        <Image source={require('../../assets/tubuh.png')} style={{
+                            width: windowWidth - 100,
+                            // height: 200,
+                            resizeMode: 'contain',
+                            alignSelf: 'center'
+                        }} />
+                    </TouchableWithoutFeedback>
                     <Text style={{
                         fontFamily: fonts.sugar[400],
                         color: colors.warning,
@@ -229,12 +240,18 @@ export default function Menu2a({ navigation, route }) {
                     fontSize: 14,
                     color: colors.secondary,
                 }}>Hore! Berikut ini adalah gambar yang berisi nama-nama bagian tubuh penyu yang benar.</Text>
-                <Image source={require('../../assets/tubuh2.png')} style={{
-                    width: windowWidth - 20,
-                    // height: 200,
-                    resizeMode: 'contain',
-                    alignSelf: 'center'
-                }} />
+
+                <TouchableWithoutFeedback onPress={() => {
+                    setGambarPilih([require('../../assets/tubuh2.png')]);
+                    setIsVisible(true);
+                }}>
+                    <Image source={require('../../assets/tubuh2.png')} style={{
+                        width: windowWidth - 20,
+                        // height: 200,
+                        resizeMode: 'contain',
+                        alignSelf: 'center'
+                    }} />
+                </TouchableWithoutFeedback>
                 <Text style={{
                     fontFamily: fonts.sugar[600],
                     fontSize: 14,
@@ -253,6 +270,13 @@ export default function Menu2a({ navigation, route }) {
                 <ActivityIndicator color={colors.secondary} size="large" />
             </View>}
 
+
+            <ImageView
+                images={gambarPilih}
+                imageIndex={0}
+                visible={visible}
+                onRequestClose={() => setIsVisible(false)}
+            />
         </SafeAreaView>
     )
 }

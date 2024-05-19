@@ -8,9 +8,14 @@ import { Icon } from 'react-native-elements';
 import { showMessage } from 'react-native-flash-message';
 import SweetAlert from 'react-native-sweet-alert';
 import SoundPlayer from 'react-native-sound-player'
+import ImageView from "react-native-image-viewing";
 
 export default function Menu2c({ navigation, route }) {
     const item = route.params;
+    const [gambarPilih, setGambarPilih] = useState([
+        require('../../assets/logo.png')
+    ])
+    const [visible, setIsVisible] = useState(false);
 
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
@@ -275,12 +280,17 @@ export default function Menu2c({ navigation, route }) {
                             marginTop: 10,
                         }}>{soal[nomor].judul}</Text>
 
-                        <Image source={soal[nomor].peta} style={{
-                            width: windowWidth,
-                            height: windowWidth / 1.5,
-                            resizeMode: 'contain',
-                            alignSelf: 'center'
-                        }} />
+                        <TouchableWithoutFeedback onPress={() => {
+                            setGambarPilih([soal[nomor].peta])
+                            setIsVisible(true)
+                        }}>
+                            <Image source={soal[nomor].peta} style={{
+                                width: windowWidth,
+                                height: windowWidth / 1.5,
+                                resizeMode: 'contain',
+                                alignSelf: 'center'
+                            }} />
+                        </TouchableWithoutFeedback>
 
 
                         <Text style={{
@@ -390,16 +400,20 @@ export default function Menu2c({ navigation, route }) {
 
                 {
                     soal[nomor].soal[(soal[nomor].soal.length) - 1].isi !== null && <View style={{
-                        flex: 1,
+                        // flex: 1,
                         padding: 20,
                     }}>
-                        <Image source={soal[nomor].tabel} style={{
-                            width: windowWidth - 20,
-                            // height: 200,
-                            resizeMode: 'contain',
-                            alignSelf: 'center'
-                        }} />
 
+                        <TouchableWithoutFeedback onPress={() => {
+                            setGambarPilih([soal[nomor].tabel])
+                            setIsVisible(true)
+                        }}>
+                            <Image source={soal[nomor].tabel} style={{
+                                width: '100%',
+                                resizeMode: 'contain',
+                                alignSelf: 'center'
+                            }} />
+                        </TouchableWithoutFeedback>
                     </View>
                 }
 
@@ -452,6 +466,13 @@ export default function Menu2c({ navigation, route }) {
                 </View>
             }
 
+
+            <ImageView
+                images={gambarPilih}
+                imageIndex={0}
+                visible={visible}
+                onRequestClose={() => setIsVisible(false)}
+            />
         </SafeAreaView >
     )
 }

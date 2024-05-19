@@ -115,7 +115,7 @@ export default function Home({ navigation, route }) {
           alignItems: 'center'
         }}>
           <MyMenu target='Menu7' img={require('../../assets/referensi.png')} label='Referensi' />
-          <MyMenu target='Menu8' img={require('../../assets/setting.png')} label='Setting dan Informasi' />
+          <MyMenu target='Menu8' img={require('../../assets/informasi.png')} label='Informasi' />
         </View>
       </View>
 

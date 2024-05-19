@@ -30,7 +30,7 @@ export default function Menu5({ navigation, route }) {
                         flex: 1,
                         fontFamily: fonts.sugar[600],
                         color: colors.white,
-                        fontSize: 18,
+                        fontSize: 14,
                     }}>{label}</Text>
                     <Icon type='ionicon' name='chevron-forward-circle' color={colors.white} />
                 </View>
@@ -85,7 +85,6 @@ export default function Menu5({ navigation, route }) {
                 <MyMenu target='Menu5a' label="Kaitan Pelestarian Penyu Dengan SDGs" />
                 <MyMenu target='Menu5a' label="Upaya Pemerintah" />
                 <MyMenu target='Menu5a' label="Upaya Sebagai Warga" />
-                <MyMenu target='Menu5a' label="Upaya Pemerintah" />
                 <MyMenu target='Menu5a' label="Upaya Sebagai Pelajar/Mahasiswa" />
                 <MyMenu target='Menu5b' label="Kuis Sikap Peduli Penyu" />
             </View>

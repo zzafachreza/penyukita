@@ -30,7 +30,7 @@ export default function Menu3({ navigation, route }) {
                         flex: 1,
                         fontFamily: fonts.sugar[600],
                         color: colors.white,
-                        fontSize: 18,
+                        fontSize: 14,
                     }}>{label}</Text>
                     <Icon type='ionicon' name='chevron-forward-circle' color={colors.white} />
                 </View>

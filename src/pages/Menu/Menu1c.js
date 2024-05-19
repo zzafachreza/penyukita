@@ -1,4 +1,4 @@
-import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { ActivityIndicator, Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { colors, fonts, windowHeight, windowWidth } from '../../utils';
 import { apiURL, api_token, MYAPP, storeData } from '../../utils/localStorage';
@@ -7,11 +7,18 @@ import RenderHtml from 'react-native-render-html';
 import { Icon } from 'react-native-elements';
 import SweetAlert from 'react-native-sweet-alert';
 import SoundPlayer from 'react-native-sound-player'
+import ImageView from "react-native-image-viewing"
 
 export default function Menu1c({ navigation, route }) {
     const item = route.params;
     const [open, setOpen] = useState(false);
     const [jawaban, setJawaban] = useState('');
+
+    const [gambarPilih, setGambarPilih] = useState([
+        require('../../assets/logo.png')
+    ])
+    const [visible, setIsVisible] = useState(false);
+
 
     const cek = (x) => {
         setOpen(true);
@@ -54,6 +61,20 @@ export default function Menu1c({ navigation, route }) {
                     fontSize: 18,
                     fontFamily: fonts.sugar[600]
                 }}>{item.label}</Text>
+                <TouchableWithoutFeedback onPress={() => Linking.openURL('https://chat.whatsapp.com/LMynyArSQtM1aQwZ8lBUOw')}>
+                    <View style={{
+
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <Image source={require('../../assets/diskusi.png')} style={{
+                            width: 50,
+                            height: 50,
+                            resizeMode: 'contain'
+                        }} />
+
+                    </View>
+                </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
                     <View style={{
 
@@ -121,11 +142,16 @@ export default function Menu1c({ navigation, route }) {
                     </TouchableWithoutFeedback>
                 </View>
 
-                <Image source={require('../../assets/all.png')} style={{
-                    width: '100%',
-                    height: windowHeight - 350,
-                    resizeMode: 'contain'
-                }} />
+                <TouchableWithoutFeedback onPress={() => {
+                    setGambarPilih([require('../../assets/all.png')]);
+                    setIsVisible(true)
+                }}>
+                    <Image source={require('../../assets/all.png')} style={{
+                        width: '100%',
+                        height: windowHeight - 350,
+                        resizeMode: 'contain'
+                    }} />
+                </TouchableWithoutFeedback>
 
                 {jawaban !== '' &&
 
@@ -159,6 +185,13 @@ export default function Menu1c({ navigation, route }) {
                     <Icon type='ionicon' name='arrow-forward' size={30} color={colors.white} />
                 </View>
             </TouchableWithoutFeedback>}
+
+            <ImageView
+                images={gambarPilih}
+                imageIndex={0}
+                visible={visible}
+                onRequestClose={() => setIsVisible(false)}
+            />
         </SafeAreaView>
     )
 }

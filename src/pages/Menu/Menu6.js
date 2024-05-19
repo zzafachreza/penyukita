@@ -127,12 +127,12 @@ export default function Menu6({ navigation, route }) {
                         }}>
                             <Text style={{
                                 fontFamily: fonts.sugar[600],
-                                fontSize: 20,
+                                fontSize: 18,
                                 color: colors.secondary
                             }}>{item.nama}</Text>
                             <Text style={{
                                 fontFamily: fonts.sugar[400],
-                                fontSize: 20,
+                                fontSize: 16,
                                 color: colors.secondary
                             }}>{item.arti}</Text>
                         </View>
