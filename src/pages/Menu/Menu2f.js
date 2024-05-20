@@ -1,13 +1,22 @@
-import { ActivityIndicator, FlatList, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { colors, fonts, windowWidth } from '../../utils';
+import { colors, fonts, windowHeight, windowWidth } from '../../utils';
 import { apiURL, api_token, MYAPP, storeData } from '../../utils/localStorage';
 import axios from 'axios';
 import RenderHtml from 'react-native-render-html';
 import { MyPicker } from '../../components';
 import SoundPlayer from 'react-native-sound-player'
+import Pdf from 'react-native-pdf';
+import ImageView from "react-native-image-viewing";
+import { TouchableOpacity } from 'react-native';
 export default function Menu2f({ navigation, route }) {
     const item = route.params;
+
+    const [gambarPilih, setGambarPilih] = useState([
+        require('../../assets/logo.png')
+    ])
+    const [visible, setIsVisible] = useState(false);
+
 
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
@@ -17,63 +26,71 @@ export default function Menu2f({ navigation, route }) {
         {
             jenis: 'Penyu hijau',
             status: 'Endangered (Terancam)',
-            img: require('../../assets/hijau.png'),
+            img: require('../../assets/kon1.png'),
             isi: '',
+            sumber: 'https://www.iucnredlist.org'
         },
         {
             jenis: 'Penyu belimbing',
             status: 'Vulnerable (Rentan)',
-            img: require('../../assets/belimbing.png'),
-            isi: ''
+            img: require('../../assets/kon2.png'),
+            isi: '',
+            sumber: 'https://www.iucnredlist.org'
         },
         {
             jenis: 'Penyu lekang',
             status: 'Vulnerable (Rentan)',
-            img: require('../../assets/lekang.png'),
-            isi: ''
+            img: require('../../assets/kon3.png'),
+            isi: '',
+            sumber: 'https://www.iucnredlist.org'
         },
         {
             jenis: 'Penyu tempayan',
             status: 'Vulnerable (Rentan)',
-            img: require('../../assets/hijau.png'),
-            isi: ''
+            img: require('../../assets/kon4.png'),
+            isi: '',
+            sumber: 'https://www.iucnredlist.org'
         },
         {
             jenis: 'Penyu pipih',
             status: 'Data Deficient (Informasi Kurang)',
-            img: require('../../assets/pipih.png'),
-            isi: ''
+            img: require('../../assets/kon5.png'),
+            isi: '',
+            sumber: 'https://www.iucnredlist.org'
         },
         {
             jenis: 'Penyu sisik',
-            status: 'Critically Endangered (Kritis)',
-            img: require('../../assets/sisik.png'),
-            isi: ''
+            status: 'Critically Endangered (Sangat Terancam)',
+            img: require('../../assets/kon6.png'),
+            isi: '',
+            sumber: 'https://www.iucnredlist.org'
         },
         {
             jenis: 'Penyu kempi',
-            status: 'Critically Endangered (Kritis)',
-            img: require('../../assets/kempi.png'),
-            isi: ''
+            status: 'Critically Endangered (Sangat Terancam)',
+            img: require('../../assets/kon7.png'),
+            isi: '',
+            sumber: 'https://www.iucnredlist.org'
         },
 
 
 
-    ])
+    ]);
+
+
+
 
     useEffect(() => {
-        __GetTransaction();
-    }, [])
-
-    const __GetTransaction = () => {
-        setLoading(true);
-        axios.post(apiURL + 'artikel', {
-            judul: item.label
+        axios.post(apiURL + 'artkel_pdf', {
+            judul: route.params.label
         }).then(res => {
-            setData(res.data[0]);
-            setLoading(false);
+            console.log(res.data);
+            setData(res.data[0])
+        }).finally(() => {
+            setLoading(false)
         })
-    }
+    }, []);
+
 
     return (
         <SafeAreaView style={{
@@ -110,20 +127,48 @@ export default function Menu2f({ navigation, route }) {
             </View>
 
             {!loading && <View style={{
-                padding: 10,
+
                 flex: 1,
             }}>
+
                 <ScrollView showsVerticalScrollIndicator={false} style={{
+                    padding: 10,
                 }}>
-                    <RenderHtml
-                        contentWidth={windowWidth}
+
+                    <Pdf
+                        style={{
+                            flex: 1,
+                            height: windowHeight - 100,
+                            backgroundColor: colors.primary,
+
+                        }}
+                        minScale={1.0}
+                        maxScale={3.0}
+                        scale={1.0}
+                        spacing={0}
+
+                        trustAllCerts={false}
+                        // source={{ uri: webURL + data.foto_pdf, cache: true }}
                         source={{
-                            html: data.keterangan
+                            uri: data.pdf, cache: true
+                        }}
+                        onLoadComplete={(numberOfPages, filePath) => {
+                            console.log(`Number of pages: ${numberOfPages}`);
+                        }}
+                        onPageChanged={(page, numberOfPages) => {
+                            console.log(`Current page: ${page}`);
+                        }}
+                        onError={(error) => {
+                            console.log(error);
+                        }}
+                        onPressLink={(uri) => {
+                            Linking.openURL(uri)
                         }}
                     />
                     <View style={{
                         flex: 1
                     }}>
+
                         <FlatList data={soal} renderItem={({ item, index }) => {
                             return (
                                 <View style={{
@@ -141,15 +186,25 @@ export default function Menu2f({ navigation, route }) {
                                             fontFamily: fonts.sugar[600],
                                             fontSize: 16
                                         }}>Jenis Penyu</Text>
-                                        <Text style={{
-                                            fontFamily: fonts.sugar[400],
-                                            fontSize: 16,
-                                            color: colors.secondary,
-                                        }}>{item.jenis}</Text>
-                                        <Image source={item.img} style={{
-                                            width: 100,
-                                            height: 100
-                                        }} />
+                                        <TouchableWithoutFeedback onPress={() => {
+                                            setGambarPilih([item.img]);
+                                            setIsVisible(true);
+                                        }}>
+                                            <Image source={item.img} style={{
+                                                width: '95%',
+                                                height: 180,
+                                            }} />
+                                        </TouchableWithoutFeedback>
+
+
+                                        <TouchableOpacity onPress={() => Linking.openURL(item.sumber)}>
+                                            <Text style={{
+                                                marginTop: 10,
+                                                fontFamily: fonts.sugar[400],
+                                                fontSize: 10,
+                                                color: colors.secondary,
+                                            }}>Sumber : {item.sumber}</Text>
+                                        </TouchableOpacity>
 
                                     </View>
                                     <View style={{
@@ -211,6 +266,14 @@ export default function Menu2f({ navigation, route }) {
             }}>
                 <ActivityIndicator color={colors.secondary} size="large" />
             </View>}
+
+
+            <ImageView
+                images={gambarPilih}
+                imageIndex={0}
+                visible={visible}
+                onRequestClose={() => setIsVisible(false)}
+            />
 
         </SafeAreaView>
     )

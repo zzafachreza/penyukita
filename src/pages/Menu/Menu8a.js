@@ -1,30 +1,27 @@
-import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { ActivityIndicator, Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { colors, fonts, windowWidth } from '../../utils';
+import { colors, fonts, windowHeight, windowWidth } from '../../utils';
 import { apiURL, api_token, MYAPP, storeData } from '../../utils/localStorage';
 import axios from 'axios';
 import RenderHtml from 'react-native-render-html';
+import { Icon } from 'react-native-elements';
+import Pdf from 'react-native-pdf';
 
 export default function Menu8a({ navigation, route }) {
     const item = route.params;
-
-    const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
+    const [data, setData] = useState({});
 
     useEffect(() => {
-        __GetTransaction();
-    }, [])
-
-    const __GetTransaction = () => {
-        setLoading(true);
-        axios.post(apiURL + 'artikel', {
-            judul: item.label
+        axios.post(apiURL + 'artkel_pdf', {
+            judul: route.params.label
         }).then(res => {
-            setData(res.data[0]);
-            setLoading(false);
+            console.log(res.data);
+            setData(res.data[0])
+        }).finally(() => {
+            setLoading(false)
         })
-    }
-
+    }, []);
     return (
         <SafeAreaView style={{
             flex: 1,
@@ -35,8 +32,11 @@ export default function Menu8a({ navigation, route }) {
                 flexDirection: 'row',
                 alignItems: 'center'
             }}>
+                <Image source={item.img} style={{
+                    width: 60,
+                    height: 60
+                }} />
                 <Text style={{
-
                     flex: 1,
                     color: colors.secondary,
                     paddingLeft: 10,
@@ -59,30 +59,53 @@ export default function Menu8a({ navigation, route }) {
                 </TouchableWithoutFeedback>
             </View>
 
-            {!loading && <View style={{
-                padding: 10,
-                flex: 1,
-            }}>
-                <ScrollView showsVerticalScrollIndicator={false} style={{
+            {!loading &&
+                <View style={{
+                    flex: 1,
+                    // justifyContent: 'flex-start',
+
                 }}>
-                    <RenderHtml
-                        contentWidth={windowWidth}
+                    <Pdf
+                        style={{
+                            flex: 1,
+                            backgroundColor: colors.primary,
+
+                        }}
+                        minScale={route.params.label == 'Petunjuk Penggunaan' ? 2.9 : 1.0}
+                        maxScale={route.params.label == 'Petunjuk Penggunaan' ? 2.9 : 3.0}
+                        scale={route.params.label == 'Petunjuk Penggunaan' ? 2.9 : 1.0}
+                        spacing={0}
+
+                        trustAllCerts={false}
+                        // source={{ uri: webURL + data.foto_pdf, cache: true }}
                         source={{
-                            html: data.keterangan
+                            uri: data.pdf, cache: true
+                        }}
+                        onLoadComplete={(numberOfPages, filePath) => {
+                            console.log(`Number of pages: ${numberOfPages}`);
+                        }}
+                        onPageChanged={(page, numberOfPages) => {
+                            console.log(`Current page: ${page}`);
+                        }}
+                        onError={(error) => {
+                            console.log(error);
+                        }}
+                        onPressLink={(uri) => {
+                            Linking.openURL(uri)
                         }}
                     />
-                </ScrollView>
-            </View>}
+                </View>
+            }
 
-
-            {loading && <View style={{
-                padding: 20,
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <ActivityIndicator color={colors.secondary} size="large" />
-            </View>}
+            {
+                loading && <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <ActivityIndicator size="large" color={colors.secondary} />
+                </View>
+            }
 
         </SafeAreaView>
     )

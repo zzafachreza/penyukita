@@ -5,7 +5,6 @@ import { apiURL, api_token, MYAPP, storeData } from '../../utils/localStorage';
 import axios from 'axios';
 import RenderHtml from 'react-native-render-html';
 import { Icon } from 'react-native-elements';
-import Pdf from 'react-native-pdf';
 
 export default function Menu8({ navigation, route }) {
     const item = route.params;
@@ -31,7 +30,7 @@ export default function Menu8({ navigation, route }) {
                         flex: 1,
                         fontFamily: fonts.sugar[600],
                         color: colors.white,
-                        fontSize: 18,
+                        fontSize: 14,
                     }}>{label}</Text>
                     <Icon type='ionicon' name='chevron-forward-circle' color={colors.white} />
                 </View>
@@ -43,7 +42,7 @@ export default function Menu8({ navigation, route }) {
             flex: 1,
             backgroundColor: colors.primary,
         }}>
-            {/* <View style={{
+            <View style={{
                 padding: 10,
                 flexDirection: 'row',
                 alignItems: 'center'
@@ -73,41 +72,18 @@ export default function Menu8({ navigation, route }) {
 
                     </View>
                 </TouchableWithoutFeedback>
-            </View> */}
+            </View>
 
             <View style={{
                 flex: 1,
-
+                padding: 20,
+                justifyContent: 'flex-start'
             }}>
-                <Pdf
-                    style={{
-                        flex: 1,
-
-                        backgroundColor: colors.primary
-                    }}
-                    minScale={2.9}
-                    maxScale={2.9}
-                    scale={2.90}
 
 
-                    trustAllCerts={false}
-                    // source={{ uri: webURL + data.foto_pdf, cache: true }}
-                    source={{
-                        uri: 'https://penyu.okeadmin.com/petunjuk.pdf', cache: true
-                    }}
-                    onLoadComplete={(numberOfPages, filePath) => {
-                        console.log(`Number of pages: ${numberOfPages}`);
-                    }}
-                    onPageChanged={(page, numberOfPages) => {
-                        console.log(`Current page: ${page}`);
-                    }}
-                    onError={(error) => {
-                        console.log(error);
-                    }}
-                    onPressLink={(uri) => {
-                        console.log(`Link pressed: ${uri}`);
-                    }}
-                />
+                <MyMenu target='Menu8a' label="Tujuan Aplikasi" />
+                <MyMenu target='Menu8a' label="Petunjuk Penggunaan" />
+                <MyMenu target='Menu8a' label="Profil Pengembang" />
             </View>
 
         </SafeAreaView>

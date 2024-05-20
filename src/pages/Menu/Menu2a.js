@@ -11,6 +11,7 @@ import SoundPlayer from 'react-native-sound-player'
 import ImageView from "react-native-image-viewing";
 
 export default function Menu2a({ navigation, route }) {
+
     const item = route.params;
     const [gambarPilih, setGambarPilih] = useState([
         require('../../assets/logo.png')

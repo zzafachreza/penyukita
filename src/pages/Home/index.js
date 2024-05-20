@@ -79,7 +79,7 @@ export default function Home({ navigation, route }) {
           marginLeft: 10,
           color: colors.warning,
           textShadowColor: colors.black,
-          textShadowRadius: 20,
+
         }}>Mari Kita Belajar !</Text>
 
       </View>
